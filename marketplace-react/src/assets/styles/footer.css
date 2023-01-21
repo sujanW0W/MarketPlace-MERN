@@ -1,0 +1,58 @@
+footer{
+    margin: 20px;
+    padding: 20px;
+    font-size: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.footerContent{
+    display: flex;
+    justify-content: space-between;
+}
+
+.footerBanner{
+    width: 40%;
+}
+
+.footerLinks{
+    display: flex;
+    justify-content: space-between;
+    width: 55%;
+    gap: 20px;
+    padding-right: 20px;
+}
+
+footer h1{
+    font-size: 2rem;
+}
+
+footer h2{
+    font-size: 1.5rem;
+}
+
+.newsletterSection{
+    display: flex;
+    justify-content: space-between;
+}
+
+.emailDiv > input{
+    font-size: 1.2rem;
+    padding: 5px;
+    margin-right: 15px;
+}
+
+.socials{
+    width: 200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 2rem;
+    padding: 10px;
+}
+
+.copyrightSection{
+    padding: 5px;
+    text-align: center;
+    font-weight: 600;
+}
