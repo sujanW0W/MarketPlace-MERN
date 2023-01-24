@@ -1,4 +1,11 @@
 main{
     padding: 40px;
-    background-color: cadetblue;
+}
+
+h2{
+    font-weight: 600;
+}
+
+p{
+    font-weight: 400;
 }

@@ -1,0 +1,14 @@
+- multipart/form-data : Done
+- get product Data with image : Done.
+- redux setup : 
+- Product Cards : 
+- Productr Page : 
+- Product Add Form :
+- Login/Sign Up form : 
+- Email Verification :
+- Forget Password Form : 
+
+
+I have stored image in a different collection. The relation between product and its image is made by storing the producdId as a field in the image document.
+For one to one relation, this is fine. But, if there are multiple images for one particular product, there would be one to many relation and if this same approach is continued, there would occur data redundancy as same productId has to be stored by multiple image documents.
+A better approach would be: Storing image document independently and storing the imageId in the product collection. If there are multiple images, just store all the ids of the images in a filed of the product collection.

@@ -1,45 +1,55 @@
-const Products = require("../model/productsSchema")
-const { BadRequest, NotFound, UnAuthenticated } = require("../errors/")
-const { StatusCodes } = require("http-status-codes")
+const Products = require("../model/productsSchema");
+const { BadRequest, NotFound, UnAuthenticated } = require("../errors/");
+const { StatusCodes } = require("http-status-codes");
 
 const getAllProducts = async (req, res) => {
     const products = await Products.find({ createdBy: req.user.userID }).sort(
         "-price"
-    )
-    if (products.length === 0) throw new NotFound("No products Found.")
+    );
+    if (products.length === 0) throw new NotFound("No products Found.");
 
-    res.status(StatusCodes.OK).json({ noHits: products.length, products })
-}
+    res.status(StatusCodes.OK).json({ noHits: products.length, products });
+};
 
 const getProduct = async (req, res) => {
     const {
         user: { userID },
         params: { id: productID },
-    } = req
+    } = req;
 
     const product = await Products.findById({
         _id: productID,
         createdBy: userID,
-    })
-    if (!product) throw new NotFound(`Product with id: ${productID} not Found.`)
+    });
+    if (!product)
+        throw new NotFound(`Product with id: ${productID} not Found.`);
 
-    res.status(StatusCodes.OK).json(product)
-}
+    res.status(StatusCodes.OK).json(product);
+};
 
-const createProduct = async (req, res) => {
-    req.body.createdBy = req.user.userID
-    const product = await Products.create(req.body)
-    res.status(StatusCodes.CREATED).json(product)
-}
+// const createProduct = async (req, res, next) => {
+//     req.body.createdBy = req.user.userID;
+
+//     const productData = JSON.parse(req.body.data);
+//     productData.createdBy = req.user.userID;
+
+//     const product = await Products.create(productData);
+
+//     // res.status(StatusCodes.CREATED).json(product);
+
+//     req.product = product;
+//     next();
+// };
 
 const updateProduct = async (req, res) => {
     const {
         user: { userID },
         params: { id: productID },
         body: { name, price, status },
-    } = req
+    } = req;
 
-    if (!name || !price || !status) throw new BadRequest("Invalid Credentials.")
+    if (!name || !price || !status)
+        throw new BadRequest("Invalid Credentials.");
 
     const product = await Products.findOneAndUpdate(
         { _id: productID, createdBy: userID },
@@ -47,32 +57,33 @@ const updateProduct = async (req, res) => {
         {
             new: true,
         }
-    )
+    );
 
-    if (!product) throw new NotFound(`Product with id: ${productID} not Found.`)
+    if (!product)
+        throw new NotFound(`Product with id: ${productID} not Found.`);
 
-    res.status(StatusCodes.OK).json(product)
-}
+    res.status(StatusCodes.OK).json(product);
+};
 
 const deleteProduct = async (req, res) => {
     const {
         user: { userID },
         params: { id: productID },
-    } = req
+    } = req;
 
     const product = await Products.findOneAndDelete({
         _id: productID,
         createdBy: userID,
-    })
-    if (!product) throw new NotFound(`Product with id: ${productID} not Found.`)
+    });
+    if (!product)
+        throw new NotFound(`Product with id: ${productID} not Found.`);
 
-    res.status(StatusCodes.OK).json(product)
-}
+    res.status(StatusCodes.OK).json(product);
+};
 
 module.exports = {
     getAllProducts,
     getProduct,
-    createProduct,
     updateProduct,
     deleteProduct,
-}
+};

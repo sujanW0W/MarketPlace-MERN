@@ -1,22 +1,31 @@
-const express = require("express")
-const router = express.Router()
+const express = require("express");
+const router = express.Router();
+const multer = require("multer");
 
 const {
     getAllProducts,
     getProduct,
-    createProduct,
     updateProduct,
     deleteProduct,
-} = require("../controller/products")
+} = require("../controller/products");
 
-router.get("/", getAllProducts)
+const {
+    createProduct,
+    getProductImage,
+} = require("../controller/createProduct");
 
-router.get("/:id", getProduct)
+router.get("/", getAllProducts);
 
-router.post("/", createProduct)
+router.get("/:id", getProduct);
 
-router.patch("/:id", updateProduct)
+// router.post("/", multer().any(), createProduct, uploadImage); //Cant get image after getting the json contenet. Error: Unexpected end of form
 
-router.delete("/:id", deleteProduct)
+router.post("/", createProduct);
 
-module.exports = router
+router.get("/image/:productId", getProductImage);
+
+router.patch("/:id", updateProduct);
+
+router.delete("/:id", deleteProduct);
+
+module.exports = router;
