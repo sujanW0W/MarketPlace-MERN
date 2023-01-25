@@ -1,6 +1,7 @@
 const multer = require("multer");
 const Image = require("../model/imageSchema");
 const path = require("path");
+const fs = require("fs");
 const { StatusCodes } = require("http-status-codes");
 const Products = require("../model/productsSchema");
 
@@ -37,7 +38,9 @@ const createProduct = (req, res) => {
                 name: req.file.filename,
                 desc: req.body.desc,
                 image: {
-                    data: req.file.filename,
+                    data: fs.readFileSync(
+                        __dirname + "/../" + "uploads/" + req.file.filename
+                    ),
                     contentType: "image/png",
                 },
             });
@@ -63,8 +66,9 @@ const createProduct = (req, res) => {
 const getProductImage = async (req, res) => {
     const { productId } = req.params;
     const imageDetails = await Image.findOne({ productId });
-
-    res.download("./uploads/" + imageDetails.name);
+    res.json(imageDetails);
+    // res.setHeader("content-type", "image/png");
+    // res.download("./uploads/" + imageDetails.name);
 };
 
 module.exports = { createProduct, getProductImage };

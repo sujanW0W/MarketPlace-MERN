@@ -4,7 +4,7 @@ import axios from "axios";
 const Homepage = () => {
     const [products, setProducts] = useState();
 
-    const url = "http://localhost:5000/api/v1/products/";
+    const url = "http://localhost:5000/api/v1/products";
     const token =
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2MzcxZTg2MzIzMWYxMDYyOTIxNjQyZmEiLCJuYW1lIjoic3VqYW4iLCJpYXQiOjE2NzQzNzc4MjQsImV4cCI6MTY3Njk2OTgyNH0.VjejrRMP1pHDIgdKXa4tUDTQr7A4vSeFt5L-wIwciEI";
 
@@ -14,20 +14,46 @@ const Homepage = () => {
                 authorization: `Bearer ${token}`,
             },
         });
-        setProducts(response.data.products);
+        fetchImage(response.data.products);
     };
+
+    const fetchImage = (productsDetails) => {
+        const productsWithImage = productsDetails.map(async (product) => {
+            const image = await axios.get(`${url}/image/${product._id}`, {
+                headers: {
+                    authorization: `Bearer ${token}`,
+                },
+            });
+
+            product.image = image.data;
+            return product;
+        });
+
+        Promise.all(productsWithImage).then((fulfilledArray) =>
+            setProducts(fulfilledArray)
+        );
+    };
+
     useEffect(() => {
         fetchProducts();
     }, []);
+
+    const getImage = (imgObj) => {
+        if (!imgObj) return <img src="" alt="NA" />;
+        const base64String = btoa(
+            String.fromCharCode(...new Uint8Array(imgObj.image.data.data))
+        );
+        return <img src={`data:image/png;base64,${base64String}`} alt="NA" />;
+    };
 
     const productsArray =
         products &&
         products.map((product) => (
             <div key={product._id}>
-                {console.log(product)}
                 <p>
                     <span>{product.name}</span>
                     <span>{product.price}</span>
+                    {getImage(product.image)}
                 </p>
             </div>
         ));
