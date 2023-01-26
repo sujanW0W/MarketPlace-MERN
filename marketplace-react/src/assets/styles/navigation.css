@@ -5,12 +5,13 @@ header{
     width: 100%;
     font-size: 1.2rem;
     padding: 10px 50px;
-    position: absolute;
-
+    background-color: #595959; 
+    background-color: transparent; /*Use this property in homepage only. So that the header's background gets transparent. */
     color: #f9f9f9;
+    position: absolute;
 }
 
-nav h1{
+header h1{
     margin: 5px;
 }
 

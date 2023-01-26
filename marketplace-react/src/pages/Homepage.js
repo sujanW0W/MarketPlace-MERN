@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import ProductCard from "../components/Products/ProductCard";
+
+import { fetchAllProducts } from "../features/products/productsSlice";
+import { useDispatch } from "react-redux";
 
 const Homepage = () => {
     const [products, setProducts] = useState();
@@ -34,44 +38,32 @@ const Homepage = () => {
         );
     };
 
+    const dispatch = useDispatch();
+
+    const fetchProductsRedux = async () => {
+        try {
+            await dispatch(fetchAllProducts());
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
     useEffect(() => {
         fetchProducts();
-    }, []);
 
-    const getImage = (imgObj) => {
-        if (!imgObj) return <img src="" alt="NA" />;
-        const base64String = btoa(
-            String.fromCharCode(...new Uint8Array(imgObj.image.data.data))
-        );
-        return <img src={`data:image/png;base64,${base64String}`} alt="NA" />;
-    };
+        fetchProductsRedux();
+    }, []);
 
     const productsArray =
         products &&
         products.map((product) => (
-            <div key={product._id}>
-                <p>
-                    <span>{product.name}</span>
-                    <span>{product.price}</span>
-                    {getImage(product.image)}
-                </p>
-            </div>
+            <ProductCard key={product._id} product={product} />
         ));
 
     return (
-        <div>
+        <div className="productsSection">
             <h2>Products</h2>
-            <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Veritatis inventore sapiente ipsa, commodi ad aperiam quibusdam
-                debitis reprehenderit voluptas temporibus, a repellendus autem
-                placeat praesentium dignissimos, provident molestias maiores.
-                Suscipit? Lorem, ipsum dolor sit amet consectetur adipisicing
-                elit. Repellendus expedita dignissimos beatae laborum! Autem
-                accusantium saepe optio magnam, dolorum deserunt nemo maxime,
-                incidunt nisi, distinctio consectetur et numquam quos ex?
-            </p>
-            {productsArray}
+            <div className="productsList">{productsArray}</div>
         </div>
     );
 };
