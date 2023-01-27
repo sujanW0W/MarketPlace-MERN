@@ -1,7 +1,7 @@
 import React from "react";
 import "../../assets/styles/products/productCard.css";
 
-const ProductCard = ({ product }) => {
+const ProductCard = ({ product, image }) => {
     const arrayBufferToBase64 = (buffer) => {
         let binary = "";
         let bytes = new Uint8Array(buffer);
@@ -24,10 +24,11 @@ const ProductCard = ({ product }) => {
         const base64String = arrayBufferToBase64(imgObj.image.data.data);
         return `data:image/png;base64,${base64String}`;
     };
+
     return (
         <div className="cardDiv">
             <div className="productImage">
-                <img src={getImage(product.image)} alt="NA" />
+                <img src={getImage(image)} alt="NA" />
             </div>
             <div className="productDetails">
                 <h3>{product.name}</h3>
