@@ -1,8 +1,8 @@
 - multipart/form-data : Done
 - get product Data with image : Done.
 - redux setup : Done.
-- Product Cards : 
-- Productr Page : 
+- Product Cards : Fine for now.
+- Product Page : Fine for now.
 - Product Add Form :
 - Login/Sign Up form : 
 - Email Verification :
@@ -18,3 +18,4 @@ Problem: It is getting very difficult to fetch products' details and images sepa
 Solution: I think these two solutions might work:
     1. Perform multiple queries(one in products and another in images collection) and integrate the response into one and send a single response to client.
     2. Make multiple slices(one for products and another for images). 
+

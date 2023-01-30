@@ -3,6 +3,8 @@ import Layout from "./components/Layout";
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
 import Homepage from "./pages/Homepage";
+import ProductPage from "./pages/ProductPage";
+import NotFound from "./components/NotFound";
 
 const App = () => {
     return (
@@ -10,7 +12,13 @@ const App = () => {
             <Routes>
                 <Route path="/" element={<Layout />}>
                     <Route index element={<Homepage />} />
+
+                    <Route path="product/:productId">
+                        <Route index element={<ProductPage />} />
+                    </Route>
                 </Route>
+
+                <Route path="/*" element={<NotFound />} />
             </Routes>
         </div>
     );

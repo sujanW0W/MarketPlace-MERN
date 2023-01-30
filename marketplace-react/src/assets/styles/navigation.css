@@ -6,9 +6,8 @@ header{
     font-size: 1.2rem;
     padding: 10px 50px;
     background-color: #595959; 
-    background-color: transparent; /*Use this property in homepage only. So that the header's background gets transparent. */
+    
     color: #f9f9f9;
-    position: absolute;
 }
 
 header h1{

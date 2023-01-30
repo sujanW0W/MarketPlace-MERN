@@ -19,7 +19,7 @@ const imageURL = `http://localhost:5000/api/v1/products/image`;
 const token =
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2MzcxZTg2MzIzMWYxMDYyOTIxNjQyZmEiLCJuYW1lIjoic3VqYW4iLCJpYXQiOjE2NzQzNzc4MjQsImV4cCI6MTY3Njk2OTgyNH0.VjejrRMP1pHDIgdKXa4tUDTQr7A4vSeFt5L-wIwciEI";
 
-const imageAPICall = async (productId) => {
+const fetchAnImage = async (productId) => {
     const response = await axios.get(`${imageURL}/${productId}`, {
         headers: {
             authorization: `Bearer ${token}`,
@@ -28,21 +28,31 @@ const imageAPICall = async (productId) => {
     return response.data;
 };
 
+// export const fetchAllImages = createAsyncThunk(
+//     "images/fetchAllImages",
+//     async (products) => {
+//         if (!products || products.length === 0) return;
+
+//         const imagesResponse = await products.map((product) => {
+//             const imageObj = imageAPICall(product._id);
+//             return imageObj;
+//         });
+
+//         let imagesArray;
+//         await Promise.all(imagesResponse).then((fulfilledPromise) => {
+//             imagesArray = fulfilledPromise;
+//         });
+//         return imagesArray;
+//     }
+// );
+
 export const fetchAllImages = createAsyncThunk(
     "images/fetchAllImages",
-    async (products) => {
-        if (!products || products.length === 0) return;
-
-        const imagesResponse = await products.map((product) => {
-            const imageObj = imageAPICall(product._id);
-            return imageObj;
+    async () => {
+        const response = await axios.get(`${imageURL}s/all`, {
+            headers: { authorization: `Bearer ${token}` },
         });
-
-        let imagesArray;
-        await Promise.all(imagesResponse).then((fulfilledPromise) => {
-            imagesArray = fulfilledPromise;
-        });
-        return imagesArray;
+        return response.data;
     }
 );
 

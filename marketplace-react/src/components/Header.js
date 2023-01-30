@@ -1,7 +1,6 @@
 import React from "react";
 import "../assets/styles/navigation.css";
 import { Link } from "react-router-dom";
-import Banner from "./Banner";
 
 const Header = () => {
     return (
@@ -28,7 +27,6 @@ const Header = () => {
                     </ul>
                 </nav>
             </header>
-            <Banner />
         </>
     );
 };

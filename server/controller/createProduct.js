@@ -63,6 +63,11 @@ const createProduct = (req, res) => {
     });
 };
 
+const getAllProductImages = async (req, res) => {
+    const imageDetails = await Image.find();
+    res.json(imageDetails);
+};
+
 const getProductImage = async (req, res) => {
     const { productId } = req.params;
     const imageDetails = await Image.findOne({ productId });
@@ -71,4 +76,4 @@ const getProductImage = async (req, res) => {
     // res.download("./uploads/" + imageDetails.name);
 };
 
-module.exports = { createProduct, getProductImage };
+module.exports = { createProduct, getProductImage, getAllProductImages };

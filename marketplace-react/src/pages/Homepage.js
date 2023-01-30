@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 // import axios from "axios";
 import ProductCard from "../components/Products/ProductCard";
 
@@ -9,6 +9,8 @@ import { selectAll } from "../features/products/productsSlice";
 
 import { fetchAllImages } from "../features/products/imageSlice";
 import { selectAllImages } from "../features/products/imageSlice";
+
+import Banner from "../components/Banner";
 
 const Homepage = () => {
     // const [products, setProducts] = useState();
@@ -47,6 +49,9 @@ const Homepage = () => {
     //     );
     // };
 
+    /*
+    The API Calls and dispatch is done in the index.js . By doing this, the API calls are made even when pages other than homepage are opened.
+
     const dispatch = useDispatch();
 
     const fetchProductsRedux = async () => {
@@ -59,7 +64,7 @@ const Homepage = () => {
 
     const fetchImagesRedux = async () => {
         try {
-            await dispatch(fetchAllImages(fetchedProducts));
+            await dispatch(fetchAllImages());
         } catch (error) {
             console.log(error);
         }
@@ -74,8 +79,10 @@ const Homepage = () => {
     // }, [status]);
 
     useEffect(() => {
-        fetchedProducts.length > 0 && fetchImagesRedux();
-    }, [fetchedProducts]);
+        fetchImagesRedux();
+    }, []);
+
+    */
 
     let productsArray;
     if (!fetchedProducts || fetchedProducts.length === 0) {
@@ -93,10 +100,14 @@ const Homepage = () => {
     }
 
     return (
-        <div className="productsSection">
-            <h2>Products</h2>
-            <div className="productsList">{productsArray}</div>
-        </div>
+        <>
+            <Banner />
+
+            <div className="productsSection">
+                <h2>Products</h2>
+                <div className="productsList">{productsArray}</div>
+            </div>
+        </>
     );
 };
 

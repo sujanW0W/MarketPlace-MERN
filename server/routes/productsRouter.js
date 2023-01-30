@@ -12,6 +12,7 @@ const {
 const {
     createProduct,
     getProductImage,
+    getAllProductImages,
 } = require("../controller/createProduct");
 
 router.get("/", getAllProducts);
@@ -21,6 +22,8 @@ router.get("/:id", getProduct);
 // router.post("/", multer().any(), createProduct, uploadImage); //Cant get image after getting the json contenet. Error: Unexpected end of form
 
 router.post("/", createProduct);
+
+router.get("/images/all", getAllProductImages);
 
 router.get("/image/:productId", getProductImage);
 

@@ -48,8 +48,11 @@ export const productsSlice = createSlice({
     },
 });
 
-export const { selectIds, selectAll, selectById } =
-    productsAdapter.getSelectors((state) => state.products);
+export const {
+    selectIds,
+    selectAll,
+    selectById: selectProductById,
+} = productsAdapter.getSelectors((state) => state.products);
 
 export const getStatus = () => (state) => state.products.status;
 
