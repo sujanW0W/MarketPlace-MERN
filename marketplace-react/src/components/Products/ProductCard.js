@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../../assets/styles/products/productCard.css";
 import { Link } from "react-router-dom";
 
@@ -31,9 +31,13 @@ const ProductCard = ({ product, image }) => {
     return (
         <div className="cardDiv">
             <div className="productImage">
-                <Link to={`/product/${product._id}`}>
-                    <img src={getImage(image)} alt="NA" />
-                </Link>
+                {image ? (
+                    <Link to={`/product/${product._id}`}>
+                        <img src={getImage(image)} alt="NA" />
+                    </Link>
+                ) : (
+                    <p>Loading...</p>
+                )}
             </div>
             <div className="productDetails">
                 <h3>{product.name}</h3>

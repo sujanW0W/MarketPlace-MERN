@@ -5,6 +5,7 @@ import "./App.css";
 import Homepage from "./pages/Homepage";
 import ProductPage from "./pages/ProductPage";
 import NotFound from "./components/NotFound";
+import AddProduct from "./pages/forms/AddProduct";
 
 const App = () => {
     return (
@@ -15,6 +16,10 @@ const App = () => {
 
                     <Route path="product/:productId">
                         <Route index element={<ProductPage />} />
+                    </Route>
+
+                    <Route path="addProduct">
+                        <Route index element={<AddProduct />} />
                     </Route>
                 </Route>
 

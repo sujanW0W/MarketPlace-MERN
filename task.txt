@@ -3,10 +3,14 @@
 - redux setup : Done.
 - Product Cards : Fine for now.
 - Product Page : Fine for now.
-- Product Add Form :
+- Product Add Form : Fine for now. Working!
 - Login/Sign Up form : 
 - Email Verification :
 - Forget Password Form : 
+
+- Assign roles of users: 
+- Authorization Based on Roles (backend): 
+- Update and delete of Products: 
 
 
 I have stored image in a different collection. The relation between product and its image is made by storing the producdId as a field in the image document.

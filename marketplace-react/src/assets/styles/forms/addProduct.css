@@ -1,0 +1,60 @@
+.addProductDiv{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+    padding: 50px;
+    
+}
+
+.formUpperSection{
+    font-size: 2rem;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    border: 1px solid black;
+    border-radius: 100%;
+}
+
+.inputSection{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 50px;
+    width: 50%;
+}
+
+.inputSection > input{
+    width: 50%;
+    font-size: 1.2rem;
+    padding: 5px;
+    border: 1px solid black;
+    border-radius: 3px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.inputSection > .inputImage{
+    width: 50%;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.inputImage > svg{
+    scale: 2;
+}
+
+.inputImage > input {
+    font-size: 1.2rem;
+}
