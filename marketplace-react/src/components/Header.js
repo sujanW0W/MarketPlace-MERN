@@ -1,8 +1,51 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../assets/styles/navigation.css";
 import { Link } from "react-router-dom";
+import jwt_decode from "jwt-decode";
+import Button from "./Button";
 
 const Header = () => {
+    const [isLoggedIn, setIsLoggedIn] = useState();
+
+    useEffect(() => {
+        localStorage.getItem("accessToken") && setIsLoggedIn(true);
+    }, []);
+
+    const handleLogout = () => {
+        localStorage.removeItem("accessToken");
+        setIsLoggedIn(false);
+    };
+
+    let loginElement;
+
+    //IIFE - Immediately Invoked Function Expression
+    (() => {
+        if (isLoggedIn) {
+            let userDetails = jwt_decode(localStorage.getItem("accessToken"));
+
+            loginElement = (
+                <li
+                    style={{
+                        display: "flex",
+                        gap: "10px",
+                        alignItems: "center",
+                    }}
+                >
+                    <p style={{ margin: "0px" }}>{userDetails.name}</p>
+                    <Button
+                        buttonText={"Logout"}
+                        onClickFunction={handleLogout}
+                    />
+                </li>
+            );
+        } else
+            loginElement = (
+                <li id="loginNav">
+                    <Link to="/user/login"> Login </Link>
+                </li>
+            );
+    })();
+
     return (
         <>
             <header>
@@ -21,9 +64,7 @@ const Header = () => {
                         <li>
                             <Link to="/">Contact Us</Link>
                         </li>
-                        <li id="loginNav">
-                            <Link to="/"> Login </Link>
-                        </li>
+                        {loginElement}
                     </ul>
                 </nav>
             </header>

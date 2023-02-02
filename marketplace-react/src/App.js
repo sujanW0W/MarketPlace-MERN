@@ -6,6 +6,9 @@ import Homepage from "./pages/Homepage";
 import ProductPage from "./pages/ProductPage";
 import NotFound from "./components/NotFound";
 import AddProduct from "./pages/forms/AddProduct";
+import Login from "./pages/forms/Login";
+import Register from "./pages/forms/Register";
+import LoginLayout from "./components/LoginLayout";
 
 const App = () => {
     return (
@@ -21,6 +24,11 @@ const App = () => {
                     <Route path="addProduct">
                         <Route index element={<AddProduct />} />
                     </Route>
+                </Route>
+
+                <Route path="/user" element={<LoginLayout />}>
+                    <Route path="login" element={<Login />} />
+                    <Route path="register" element={<Register />} />
                 </Route>
 
                 <Route path="/*" element={<NotFound />} />

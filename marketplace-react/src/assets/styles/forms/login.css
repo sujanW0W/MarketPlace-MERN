@@ -1,0 +1,65 @@
+.loginElements{
+    width: 30%;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+
+    background-color: #fff;
+    border-radius: 10px;
+}
+
+.loginInputSection{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+    width: 100%;
+}
+
+.loginInputSection > input{
+    font-size: 1.2rem;
+    width: 80%;
+    border: 1px solid;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.loginSubmitDiv{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.notRegistered{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.loginSection  p{
+    font-size: 1.2rem;
+    font-weight: 400;
+}
+
+.loginSection a{
+    font-size: 1.2rem;
+    font-weight: 400;
+}
+
+.loginIcon{
+    width: 60px;
+    height: 60px;
+    border: 1px solid black;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loginIcon > svg{
+    scale: 2;
+}
+
