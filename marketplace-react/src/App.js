@@ -9,6 +9,8 @@ import AddProduct from "./pages/forms/AddProduct";
 import Login from "./pages/forms/Login";
 import Register from "./pages/forms/Register";
 import LoginLayout from "./components/LoginLayout";
+import EmailVerification from "./pages/forms/EmailVerification";
+import ForgotPassword from "./pages/forms/ForgotPassword";
 
 const App = () => {
     return (
@@ -29,6 +31,8 @@ const App = () => {
                 <Route path="/user" element={<LoginLayout />}>
                     <Route path="login" element={<Login />} />
                     <Route path="register" element={<Register />} />
+                    <Route path="verifyUser" element={<EmailVerification />} />
+                    <Route path="forgotPassword" element={<ForgotPassword />} />
                 </Route>
 
                 <Route path="/*" element={<NotFound />} />

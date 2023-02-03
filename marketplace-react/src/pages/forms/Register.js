@@ -16,6 +16,8 @@ const Register = () => {
     //This state is used to show Loading... when the API call is being made.
     const [isLoading, setIsLoading] = useState(false);
 
+    const [errorRegister, setErrorRegister] = useState("");
+
     const navigate = useNavigate();
 
     //Check if the user logged in. if logged In, redirect to Homepage
@@ -25,6 +27,12 @@ const Register = () => {
 
     const url = "http://localhost:5000/api/v1/users/register";
     const handleRegister = async () => {
+        setErrorRegister("");
+        if (!name || !email || !password) {
+            setErrorRegister("Please Enter Credentials Properly.");
+            return;
+        }
+
         try {
             const reqBody = {
                 name,
@@ -44,10 +52,15 @@ const Register = () => {
 
             setIsLoading(false);
 
+            //For Email verification
+            // navigate(`/user/verifyUser/?email=${email}`);
+
             navigate("/");
         } catch (error) {
             console.log(error);
             //Make this error visible in the site.
+            setIsLoading(false);
+            setErrorRegister("Error Occured. Please Try Again.");
         }
     };
 
@@ -92,7 +105,10 @@ const Register = () => {
 
             <Button buttonText={"Register"} onClickFunction={handleRegister} />
 
-            {isLoading && <p style={{ margin: "0px" }}>Loading...</p>}
+            <div>
+                {isLoading && <p style={{ margin: "0px" }}>Loading...</p>}
+                <p style={{ color: "red", margin: "0px" }}>{errorRegister}</p>
+            </div>
 
             <div className="alreadyRegisteredDiv">
                 <p>Already a User?</p>

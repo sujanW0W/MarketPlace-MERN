@@ -21,9 +21,16 @@ const Login = () => {
     //This state is used to show Loading... when the API call is being made.
     const [isLoading, setIsLoading] = useState(false);
 
+    const [errorLogin, setErrorLogin] = useState("");
+
     const url = "http://localhost:5000/api/v1/users/login";
 
     const handleSubmit = async () => {
+        setErrorLogin("");
+        if (!email || !password) {
+            setErrorLogin("Please Enter Credentials.");
+            return;
+        }
         try {
             const reqBody = {
                 email,
@@ -44,7 +51,9 @@ const Login = () => {
             navigate("/");
         } catch (error) {
             console.log(error);
-            //Make this error to be visible in the site.
+
+            setIsLoading(false);
+            setErrorLogin("Email or Password incorrect. Try Again.");
         }
     };
 
@@ -81,12 +90,13 @@ const Login = () => {
                     onClickFunction={handleSubmit}
                 />
 
-                {isLoading && <p style={{ margin: "0px" }}>Loading...</p>}
-
                 <a href="https://google.com" target="_blank" rel="noreferrer">
                     Forgot Password?
                 </a>
             </div>
+
+            {isLoading && <p style={{ margin: "0px" }}>Loading...</p>}
+            <p style={{ color: "red", margin: "0px" }}> {errorLogin}</p>
 
             <div className="notRegistered">
                 <p>Not Registered? </p>
